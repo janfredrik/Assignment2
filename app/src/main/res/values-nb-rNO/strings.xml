@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Assignment2</string>
+    <string name="hello_world">Hei verden!</string>
+    <string name="action_settings">Innstillinger</string>
+</resources>
