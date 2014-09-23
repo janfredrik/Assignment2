@@ -32,4 +32,14 @@
         android:layout_centerHorizontal="true"
         android:onClick="help" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/StorageLocation"
+        android:layout_below="@+id/RecordButton"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:paddingTop="15dp" />
+
 </RelativeLayout>

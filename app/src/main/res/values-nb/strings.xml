@@ -3,10 +3,22 @@
     <string name="action_settings">Innstillinger</string>
     <string name="app_name">Assignment2</string>
     <string name="hello_world">Hei verden!</string>
+    <string name="title_activity_audio_record">Lydopptak</string>
     <string name="recording_saved">Lagret lydopptak: </string>
     <string name="photo_saved">Lagret bilde i galleriet</string>
     <string name="photo_not_saved">Bilde ikke lagret</string>
     <string name="start_recording">Start opptak</string>
     <string name="stop_recording">Avslutt opptak</string>
+        <string name="recording_help">Dine opptak er laget på enheten din i hovedmappen.
+        For å finne opptakene kan du åpne den integrerte filbehandlerapplikasjonen på telefonen din,
+        eller laste ned Astro File Manager. Filnavnet er datoen og tidspunktet opptaket ble gjort.
+    </string>
+    <string name="recordings_info">For å starte et lydopptak trykker du på knappen under.
+        Opptaket vil spilles inn helt til du trykker på knappen igjen for å stanse.\nKlikk "hjelp"
+        for å se informasjon angående lagring av opptakene.
+    </string>
+    <string name="recording_help_button">Hjelp</string>
+    <string name="camera_error">Kameraet kunne ikke åpnes</string>
+    <string name="welcome">Velkommen! Velg kamera eller lydopptak.</string>
 
 </resources>

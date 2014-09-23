@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView2"
+        android:id="@+id/CameraIcon"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/cam"
@@ -21,10 +21,10 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView3"
-        android:layout_below="@+id/imageView2"
+        android:id="@+id/MicrophoneIcon"
+        android:layout_below="@+id/CameraIcon"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/gal"
+        android:src="@drawable/mic"
         android:layout_marginTop="30dp"
         android:onClick="recordAudio" />
 

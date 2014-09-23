@@ -6,17 +6,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.text.format.Time;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import de.keyboardsurfer.android.widget.crouton.Crouton;
@@ -27,13 +23,17 @@ public class MainActivity extends Activity {
 
     static final int REQUEST_TAKE_PHOTO = 1;
     String mCurrentPhotoPath;
+    boolean welcomeMessage = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        if (!welcomeMessage) {
+            Crouton.makeText(this, this.getString(R.string.welcome), Style.INFO).show();
+            welcomeMessage = true;
+        }
     }
 
 
@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
             try {
                 photoFile = createImageFile();
             } catch (IOException ex) {
-                Toast.makeText(getApplicationContext(), "Could not start camera", Toast.LENGTH_SHORT).show();
+                Crouton.makeText(this, this.getString(R.string.camera_error), Style.ALERT).show();
             }
             // Continue only if the File was successfully created
             if (photoFile != null) {

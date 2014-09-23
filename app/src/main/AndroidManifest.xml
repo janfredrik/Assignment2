@@ -5,14 +5,14 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name">
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme"
+            android:screenOrientation="userPortrait"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -20,6 +20,7 @@
             android:name=".AudioRecord"
             android:label="@string/title_activity_audio_record"
             android:theme="@android:style/Theme.Holo.Light"
+            android:screenOrientation="userPortrait"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
