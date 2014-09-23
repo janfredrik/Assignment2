@@ -4,5 +4,7 @@
     <string name="app_name">Assignment2</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_gallery_view">GalleryView</string>
+    <string name="title_activity_audio_record">AudioRecord</string>
 
 </resources>
