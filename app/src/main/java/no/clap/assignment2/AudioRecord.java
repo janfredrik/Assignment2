@@ -11,14 +11,11 @@
 package no.clap.assignment2;
 
 import android.app.Activity;
-import android.widget.LinearLayout;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.ViewGroup;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Button;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.content.Context;
 import android.util.Log;
 import android.media.MediaRecorder;
 import android.media.MediaPlayer;
@@ -27,17 +24,21 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
-public class AudioRecord extends Activity
+
+public class AudioRecord extends FragmentActivity
 {
     private static final String LOG_TAG = "AudioRecord";
     private String mFileName = null;
 
-    private RecordButton mRecordButton = null;
     private MediaRecorder mRecorder = null;
 
-    private PlayButton   mPlayButton = null;
     private MediaPlayer   mPlayer = null;
+
+    boolean mStartRecording = true;
 
     private void onRecord(boolean start) {
         if (start) {
@@ -45,30 +46,6 @@ public class AudioRecord extends Activity
         } else {
             stopRecording();
         }
-    }
-
-    private void onPlay(boolean start) {
-        if (start) {
-            startPlaying();
-        } else {
-            stopPlaying();
-        }
-    }
-
-    private void startPlaying() {
-        mPlayer = new MediaPlayer();
-        try {
-            mPlayer.setDataSource(mFileName);
-            mPlayer.prepare();
-            mPlayer.start();
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
-        }
-    }
-
-    private void stopPlaying() {
-        mPlayer.release();
-        mPlayer = null;
     }
 
     private void startRecording() {
@@ -91,51 +68,7 @@ public class AudioRecord extends Activity
         mRecorder.stop();
         mRecorder.release();
         mRecorder = null;
-    }
-
-    class RecordButton extends Button {
-        boolean mStartRecording = true;
-
-        OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
-                mFileName = getNewFileName();                   // Get new unique file name
-                onRecord(mStartRecording);
-                if (mStartRecording) {
-                    setText("Stop recording");
-                } else {
-                    setText("Start recording");
-                }
-                mStartRecording = !mStartRecording;
-            }
-        };
-
-        public RecordButton(Context ctx) {
-            super(ctx);
-            setText("Start recording");
-            setOnClickListener(clicker);
-        }
-    }
-
-    class PlayButton extends Button {
-        boolean mStartPlaying = true;
-
-        OnClickListener clicker = new OnClickListener() {
-            public void onClick(View v) {
-                onPlay(mStartPlaying);
-                if (mStartPlaying) {
-                    setText("Stop playing");
-                } else {
-                    setText("Start playing");
-                }
-                mStartPlaying = !mStartPlaying;
-            }
-        };
-
-        public PlayButton(Context ctx) {
-            super(ctx);
-            setText("Start playing");
-            setOnClickListener(clicker);
-        }
+        Crouton.makeText(this, this.getString(R.string.recording_saved) + mFileName, Style.CONFIRM).show();
     }
 
     public AudioRecord() {
@@ -155,21 +88,25 @@ public class AudioRecord extends Activity
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+        setContentView(R.layout.activity_audio_record);
 
-        LinearLayout ll = new LinearLayout(this);
-        mRecordButton = new RecordButton(this);
-        ll.addView(mRecordButton,
-                new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
-        mPlayButton = new PlayButton(this);
-        ll.addView(mPlayButton,
-                new LinearLayout.LayoutParams(
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                        0));
-        setContentView(ll);
+        mStartRecording = true;
+
+        final Button button = (Button) findViewById(R.id.RecordButton);
+        button.setText(getResources().getString(R.string.start_recording));
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mFileName = getNewFileName();                   // Get new unique file name
+                onRecord(mStartRecording);
+                if (mStartRecording) {
+                    button.setText(getResources().getString(R.string.stop_recording));
+                } else {
+                    button.setText(getResources().getString(R.string.start_recording));
+                }
+                mStartRecording = !mStartRecording;
+            }
+        });
     }
 
     @Override
@@ -184,5 +121,10 @@ public class AudioRecord extends Activity
             mPlayer.release();
             mPlayer = null;
         }
+    }
+
+    // https://github.com/inmite/android-styled-dialogs
+    public void help(View v) {
+        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setMessage(R.string.recording_help).show();
     }
 }

@@ -19,17 +19,23 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+
 
 public class MainActivity extends Activity {
 
     static final int REQUEST_TAKE_PHOTO = 1;
     String mCurrentPhotoPath;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
+
 
     public void takePhoto(View v) {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -55,18 +61,33 @@ public class MainActivity extends Activity {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(null);
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
-        Log.d("ExternalStorage", " -  " + storageDir);
 
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath = "file:" + image.getAbsolutePath();
         return image;
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode){
+            case 1:
+                if (resultCode == Activity.RESULT_OK) {
+                    Crouton.makeText(this, this.getString(R.string.photo_saved), Style.CONFIRM).show();
+                    }
+
+                if(resultCode == Activity.RESULT_CANCELED) {
+                    Crouton.makeText(this, this.getString(R.string.photo_not_saved), Style.ALERT).show();
+                }
+        }
+    }
+
 
     public void recordAudio(View v) {
         Intent intent = new Intent(this, AudioRecord.class);
