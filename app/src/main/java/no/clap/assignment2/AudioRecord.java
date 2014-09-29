@@ -1,13 +1,3 @@
-/*
- * The application needs to have the permission to write to external storage
- * if the output file is written to the external storage, and also the
- * permission to record audio. These permissions must be set in the
- * application's AndroidManifest.xml file, with something like:
- *
- * <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
- * <uses-permission android:name="android.permission.RECORD_AUDIO" />
- *
- */
 package no.clap.assignment2;
 
 import android.os.Bundle;
@@ -19,17 +9,15 @@ import android.util.Log;
 import android.media.MediaRecorder;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import de.keyboardsurfer.android.widget.crouton.Crouton;
-import de.keyboardsurfer.android.widget.crouton.Style;
-
 import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
+// Source for the AudioRecord-code: http://developer.android.com/guide/topics/media/audio-capture.html
+// From source: Record the audio including the start and stop functions
+// Self made: Get unique filename function
 
 public class AudioRecord extends FragmentActivity {
     private static final String LOG_TAG = "AudioRecord";

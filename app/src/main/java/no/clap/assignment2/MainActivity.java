@@ -18,6 +18,7 @@ import java.util.Date;
 import de.keyboardsurfer.android.widget.crouton.Crouton;
 import de.keyboardsurfer.android.widget.crouton.Style;
 
+// Camera Intent Source: http://developer.android.com/training/camera/photobasics.html
 
 public class MainActivity extends Activity {
 
