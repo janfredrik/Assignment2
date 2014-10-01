@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="no.clap.assignment2" >
+    package="no.clap.journalism" >
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
-            android:name=".MainActivity"
+            android:name="no.clap.journalism.MainActivity"
             android:theme="@style/AppTheme"
             android:screenOrientation="userPortrait"
             android:label="@string/app_name" >
@@ -17,11 +17,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AudioRecord"
+            android:name="no.clap.journalism.AudioRecord"
             android:label="@string/title_activity_audio_record"
             android:theme="@android:style/Theme.Holo.Light"
             android:screenOrientation="userPortrait"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName="no.clap.journalism.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="no.clap.assignment2.MainActivity" />

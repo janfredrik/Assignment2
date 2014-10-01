@@ -5,7 +5,7 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "no.clap.assignment2"
+        applicationId "no.clap.journalism"
         minSdkVersion 15
         targetSdkVersion 20
         versionCode 1
@@ -27,7 +27,4 @@ dependencies {
         exclude group: 'com.google.android', module: 'support-v4'
     }
     compile 'eu.inmite.android.lib:android-styled-dialogs:1.2.0'
-
-
-
 }

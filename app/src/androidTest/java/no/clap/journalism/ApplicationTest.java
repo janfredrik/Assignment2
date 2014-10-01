@@ -1,4 +1,4 @@
-package no.clap.assignment2;
+package no.clap.journalism;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

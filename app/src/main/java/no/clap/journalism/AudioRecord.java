@@ -1,5 +1,6 @@
-package no.clap.assignment2;
+package no.clap.journalism;
 
+import no.clap.journalism.R;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
@@ -17,25 +18,30 @@ import eu.inmite.android.lib.dialogs.SimpleDialogFragment;
 
 // Source for the AudioRecord-code: http://developer.android.com/guide/topics/media/audio-capture.html
 // From source: Record the audio including the start and stop functions
-// Self made: Get unique filename function
+// External libaries used: StyledDialogs (https://github.com/inmite/android-styled-dialogs)
 
 public class AudioRecord extends FragmentActivity {
-    private static final String LOG_TAG = "AudioRecord";
     private String mFileName = null;
     private MediaRecorder mRecorder = null;
     boolean mStartRecording = true;
+    private static final String LOG_TAG = "AudioRecord";
+
+    public AudioRecord() {
+        // Empty constructor
+    }
 
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         setContentView(R.layout.activity_audio_record);
 
+        // Finds the record button and sets the text + init. listener.
         final Button button = (Button) findViewById(R.id.RecordButton);
         button.setText(getResources().getString(R.string.start_recording));
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mFileName = getNewFileName();                   // Get new unique file name
+                mFileName = getNewFileName();       // Get new unique file name
                 onRecord(mStartRecording);
                 if (mStartRecording) {
                     button.setText(getResources().getString(R.string.stop_recording));
@@ -51,13 +57,9 @@ public class AudioRecord extends FragmentActivity {
     public void onPause() {
         super.onPause();
         if (mRecorder != null) {
-            mRecorder.release();
+            mRecorder.release();                    // Release the MediaRecorder
             mRecorder = null;
         }
-    }
-
-    public AudioRecord() {
-
     }
 
     private void startRecording() {
@@ -70,7 +72,7 @@ public class AudioRecord extends FragmentActivity {
         try {
             mRecorder.prepare();
         } catch (IOException e) {
-            Log.e(LOG_TAG, "prepare() failed");
+            Log.e(LOG_TAG, "prepare() failed");     // Write to log
         }
 
         mRecorder.start();
@@ -93,6 +95,7 @@ public class AudioRecord extends FragmentActivity {
         }
     }
 
+    // Get an unique filename on the form yyyyMMdd_HHmmss + 3gp
     public String getNewFileName() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd_HHmmss");
         String currentDateandTime = sdf.format(new Date());
@@ -103,8 +106,10 @@ public class AudioRecord extends FragmentActivity {
         return mFileName;
     }
 
-    // https://github.com/inmite/android-styled-dialogs
+    // Show the help fragment with text from the string files.
     public void help(View v) {
-        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager()).setTitle(R.string.recording_help_button).setMessage(R.string.recording_help).show();
+        SimpleDialogFragment.createBuilder(this, getSupportFragmentManager())
+                .setTitle(R.string.recording_help_button).setMessage(R.string.recording_help)
+                .show();
     }
 }

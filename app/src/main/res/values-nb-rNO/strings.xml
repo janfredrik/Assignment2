@@ -1,8 +1,8 @@
 <resources>
 
+    <string name="app_name">Journalism</string>
     <string name="action_settings">Innstillinger</string>
-    <string name="app_name">Assignment2</string>
-    <string name="hello_world">Hei verden!</string>
+    <string name="title_activity_audio_record">Ta opp</string>
     <string name="recording_saved">Lagret lydopptak: </string>
     <string name="photo_saved">Lagret bilde i galleriet</string>
     <string name="photo_not_saved">Bilde ikke lagret</string>
@@ -17,5 +17,8 @@
         for å se informasjon angående lagring av opptakene.
     </string>
     <string name="recording_help_button">Hjelp</string>
+    <string name="camera_error">Kunne ikke åpne kamera</string>
+    <string name="welcome">Velkommen! Trykk på et av ikonene for å starte.</string>
+
 
 </resources>
